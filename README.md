@@ -1,6 +1,6 @@
 # A Clear Architecture
 
-In my experience, development approaches like [Domain-Driven Design] and structural concepts as the [Hexagonal Architecture] or the [Onion Architecture] carry a lot of wisdom but don't necessarily provide practical guidance when it comes to starting off with a new project. After several unsatisfactory experiments, I felt a sort of relief when I first read about the [Clean Architecture], which nicely aggregates some high-level concepts while simplifying things at the same time. However, even the Clean Architecture doesn't provide a simple-to-follow recipe for layouting a project, naming classes, files and directories and deciding where to settle a particular functionality. So I trial-and-errored myself to the point where I had a rather concise, opinionated implementation of the Clean Architecture that prove useful in several projects, even and especially in combination with each other. Le me introduce you to the **Clear Architecture**.
+In my experience, development approaches like [Domain-Driven Design] and structural concepts as the [Hexagonal Architecture] or the [Onion Architecture] carry a lot of wisdom but don't necessarily provide practical guidance when it comes to starting off with a new project. After several unsatisfactory experiments, I felt a sort of relief when I first read about the [Clean Architecture], which nicely aggregates some high-level concepts while simplifying things at the same time. However, even the Clean Architecture doesn't provide a simple-to-follow recipe for layouting a project, naming classes, files and directories and deciding where to settle a particular functionality. So I trial-and-errored myself to the point where I had a rather concise, opinionated implementation of the Clean Architecture that prove useful in several projects, even and especially in combination with each other. Le me introduce you to the **Clear Architecture**.  
 
 *Note: I won't go into too much detail regarding the various high-level concepts but rather focus on the practical side of things. Please see at the end for a list of readings I recommend for further understanding. Also, while I mainly use the Clear Architecture for PHP projects, it should be easily adoptable to other environments as well. Please let me know if you succeed (or fail) in doing so.*
 
@@ -15,7 +15,7 @@ In my experience, development approaches like [Domain-Driven Design] and structu
 
 ## Three-tier architecture
 
-<img src="https://cdn.rawgit.com/jkphl/generator-cleanphp/3306407b/doc/clear-architecture-domain-application-client-tiers.svg" alt="Clear Architecture tiers" align="right" width="50%"/>
+<img src="https://cdn.rawgit.com/jkphl/clear-architecture/b1d9d3f2/images/clear-architecture-domain-application-client-tiers.svg" alt="Clear Architecture tiers" align="right" width="50%"/>
 
 
 ### ① Domain tier
@@ -32,7 +32,7 @@ In my experience, development approaches like [Domain-Driven Design] and structu
 * Use cases orchestrating domain objects & services
 * Translating between external requests and domain logic (back and forth)
 
-> The application layer provides a currency exchange service, executes different types of bank transactions and so on.
+> The application layer provides a currency exchange service, executes different types of bank transactions and so on.  
 
 
 ### ③ Client tier (3 sectors)
@@ -46,20 +46,20 @@ In my experience, development approaches like [Domain-Driven Design] and structu
 
 #### Ports
 
-The *Ports* sector is the **public interface** of your application. It accept requests from external agencies (e.g. the Web, the command-line, an embedding system etc.), communicates them to the [infrastructure sector](#infrastructure) and the ② application layer and sends back the processed results. It represents your system to the outer world by taking the form of a web or native [GUI], a [CLI], a [REST API] or any other type of interface suitable for accessing your application. Components in this sector may include (but are not limited to):
+The *Ports* sector is the **public interface** of your application. It accept requests from external agencies (e.g. the Web, the command-line, an embedding system etc.), communicates them to the [infrastructure sector](#infrastructure) and the [② application](#-application-tier) layer and sends back the processed results. It represents your system to the outer world by taking the form of a web or native [GUI], a [CLI], a [REST API] or any other type of interface suitable for accessing your application. Components in this sector may include (but are not limited to):
 
 * [Facades]
 * [Interfaces]
 * [Factories]
 * [Exceptions] that might occur on the client layer
-* [Constant definitions] useful for accessing your application
+* [Constant definitions] useful for accessing your application 
 * Controller / Action components of [MVC] / [ADR] architectures
 
 *Note: If your application provides a web interface or similar API, don't directly use the `Ports` directory (or any of its subdirectories) as document root for web server scripts. Instead, create a top-level `public` directory and put your bootstrap script files there. Search for a similar solution when providing a CLI ([see below](#considerations-for-php-implementations) for PHP specific recommendations).*
 
 #### Infrastructure
 
-The *Infrastructure* sector is not strictly private, but it https://github.com/jkphl/generator-cleanphp/blob/master/doc/CLEAR-ARCHITECTURE.md#considerations-for-php-implementationsat are not necessarily of public interest. While the outward *[Ports](#ports)* interface should be stable in the long run and generally not subject to alterations, it's acceptable for infrastructural components to change with thehttps://github.com/jkphl/generator-cleanphp/blob/master/doc/CLEAR-ARCHITECTURE.md#portsrements. Ideally, they can be swapped against equivalent mechanisms without affecting the overall system function. External agencies should avoid direct access to infrastructural components, but there might be exceptions for efficiency's sake. Typically in this sector:
+The *Infrastructure* sector is not strictly private, but it holds all the implementation details that are not necessarily of public interest. While the outward *[Ports](#ports)* interface should be stable in the long run and generally not subject to alterations, it's acceptable for infrastructural components to change with the requirements. Ideally, they can be swapped against equivalent mechanisms without affecting the overall system function. External agencies should avoid direct access to infrastructural components, but there might be exceptions for efficiency's sake. Typically in this sector:
 
 * External [libraries] and [frameworks] (always considered to be part of the infrastructure even if stored elsewhere and / or autoloaded)
 * [Persistence] mechanisms (e.g. [database] platforms)
@@ -69,7 +69,7 @@ The *Infrastructure* sector is not strictly private, but it https://github.com/j
 
 #### Tests
 
-The *Tests* sector holds all resources required for [testing your application] on various levels. In general, tests are nothing more than highly specialized clients of your application and must be granted full access to your ③ client and ② application layers. Test resources may also be accessed by external agencies (e.g. by extension) and typically consist of:
+The *Tests* sector holds all resources required for [testing your application] on various levels. In general, tests are nothing more than highly specialized clients of your application and must be granted full access to your [③ client](#-client-tier-3-sectors) and [② application](#-application-tier) layers. Test resources may also be accessed by external agencies (e.g. by extension) and typically consist of:
 
 * Unit, integration, interface or acceptance test cases
 * Test fixtures
@@ -89,7 +89,7 @@ The *Tests* sector holds all resources required for [testing your application] o
         `-- Tests
 ```
 
-* The top level directory `src` separates the actual source files from other package resources, e.g. documentation, configuration files, 3rd party libraries etc.
+* The top level directory `src` separates the actual source files from other package resources, e.g. documentation, configuration files, 3rd party libraries etc. 
 * `<Module>` must be replaced with a vendor-unique module name in [UpperCamelCase] writing (e.g. `MyApp`).
 * The 3rd level is made up of five directories representing the main architectural tiers and sectors (see above).
 
@@ -100,13 +100,13 @@ Inside the five main directories, your application may add additional structures
 
 * Directory and file names are always to be written in **UpperCamelCase**. I prefer using singular expressions wherever possible (i.e. `Factory` instead of `Factories`).
 * If you have **multiple similar components, that are mostly used by external agents** (e.g. on a lower architectural level or by an external package), **keep them at a common central location**. As an example, I typically use directories named `Facade`, `Contract`, `Service` or `Factory` for grouping classes with similar functionality.
-* **Keep closely related components together**. If you have, for instance, a class definition that implements an interface as described in [The Dependency Inversion Principle](#the-dependency-inversion-principle), put them into the same directory instead of spreading them across the file system. This rule commonly outweighs the previhttps://github.com/jkphl/generator-cleanphp/blob/master/doc/CLEAR-ARCHITECTURE.md#the-dependency-inversion-principleersonal taste in some situations though.
+* **Keep closely related components together**. If you have, for instance, a class definition that implements an interface as described in [The Dependency Inversion Principle](#the-dependency-inversion-principle), put them into the same directory instead of spreading them across the file system. This rule commonly outweighs the previous one — it might be a matter of personal taste in some situations though.
 * If a lower architectural layer "mirrors" and extends the structure of a higher one, e.g. by providing concrete implementations of an interface defined on the higher level, **stick to the same directory and file names** as much as possible. This will help with keeping the cross-boundary relationships in mind.
 
 
 ## Rules & Conventions
 
-<img src="https://cdn.rawgit.com/jkphl/generator-cleanphp/3306407b/doc/clear-architecture-dependency-rule.svg" alt="Clear Architecture tiers" align="right" width="50%"/>
+<img src="https://cdn.rawgit.com/jkphl/clear-architecture/b1d9d3f2/images/clear-architecture-dependency-rule.svg" alt="Clear Architecture tiers" align="right" width="50%"/>
 
 
 ### The Dependency Rule
@@ -129,7 +129,7 @@ Strictly adhering to the Dependency Rule makes your application highly testable 
 
 In order to not violate the Dependency Rule, the [Dependency Inversion Principle] must be used whenever complex data needs to be passed to an inward layer. Instead of expecting and directly referencing a lower-level component (e.g. as function parameter), a layer only provides and references an interface that needs to be implemented by the caller. This way, the conventional dependency relationship in inverted and the high-level layer doesn't depend on lower-level ones.
 
-![Dependency inversion by using an interface / abstract service class](https://cdn.rawgit.com/jkphl/generator-cleanphp/4b0317a9/doc/clear-architecture-dependency-inversion.svg)
+![Dependency inversion by using an interface / abstract service class](https://cdn.rawgit.com/jkphl/clear-architecture/b1d9d3f2/images/clear-architecture-dependency-inversion.svg)
 
 
 ### Naming conventions
@@ -138,7 +138,7 @@ The following special components (including their files) must be named after the
 
 * Interfaces must use the **`Interface`** suffix (e.g. `MyCustomInterface`)
 * Traits must use the **`Trait`** suffix (e.g. `MyCustomTrait`)
-* Factories must use the **`Factory`** suffix (e.g. `MyCustomFactory`). Public method names must use the `create` prefix (e.g. `createFromParams`).
+* Factories must use the **`Factory`** suffix (e.g. `MyCustomFactory`). Public method names must use the `create` prefix (e.g. `createFromParams`). 
 
 
 ## Considerations for PHP implementations
