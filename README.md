@@ -136,6 +136,11 @@ In order to not violate the Dependency Rule, the [Dependency Inversion Principle
 ![Dependency inversion by using an interface / abstract service class](https://cdn.rawgit.com/jkphl/clear-architecture/b1d9d3f2/images/clear-architecture-dependency-inversion.svg)
 
 
+### Decoupling & Dependency Injection
+
+In general, avoid tight coupling between components and prefer abstractions / [interfaces] over concrete implementations, enabling [polymorphism] and making your application a lot better testable. You will always have to deal with object instantiation and global entities at some point, but try to limit their occurrences and manage them smartly. Some type of [Dependency Injection] mechanism might be of great help, but please consider the [possible drawbacks][Dependency Injection drawbacks] as well. 
+
+
 ### Naming conventions
 
 The following special components (and their files) must be named after their role:
@@ -156,49 +161,54 @@ The following special components (and their files) must be named after their rol
 * Use **environment variables** for configuration purposes (respectively the [phpdotenv] library or one of its equivalents).
 
 
-## Recommended readings (PHP focused)
+## Recommended readings
 
+* [S.O.L.I.D. Software Development, One Step at a Time][S.O.L.I.D. Software Development] by Derek Bailey
 * [Clean Architecture in PHP] by Kristopher Wilson
 * [Domain-Driven Design in PHP] by Carlos Buenosvinos et al.
 
 
-[ADR]: http://pmjones.io/adr/
-[Clean Architecture in PHP]: https://leanpub.com/cleanphp
-[Clean Architecture]: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html "The Clean Architecture by Bob Martin"
-[Clear Architecture Yeoman Generator]: https://github.com/jkphl/generator-cleanphp
-[CLI]: https://en.wikipedia.org/wiki/Command-line_interface
-[Code Climate]: https://codeclimate.com/
+[ADR]: http://pmjones.io/adr/ "Action-Domain-Responder by Paul M. Jones"
+[Clean Architecture in PHP]: https://leanpub.com/cleanphp "Clean Architecture in PHP by Kristopher Wilson"
+[Clean Architecture]: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html "The Clean Architecture by Robert C. Martin"
+[Clear Architecture Yeoman Generator]: https://github.com/jkphl/generator-cleanphp "Clear Architecture PHP Project Yeoman Generator by Joschi Kuphal"
+[CLI]: https://en.wikipedia.org/wiki/Command-line_interface "Command-line Interface on Wikipedia"
+[Code Climate]: https://codeclimate.com/ "Automated code review | Code Climate"
 [Composer]: https://getcomposer.org "Composer — Dependency Manager for PHP"
-[Constant definitions]: https://en.wikipedia.org/wiki/Constant_%28computer_programming%29
-[database]: https://en.wikipedia.org/wiki/Database
-[Dependency Inversion Principle]: https://en.wikipedia.org/wiki/Dependency_inversion_principle
-[Domain-Driven Design in PHP]: https://leanpub.com/ddd-in-php
-[Domain-Driven Design]: https://en.wikipedia.org/wiki/Domain-driven_design
-[**Domain** objects & services]: https://en.wikipedia.org/wiki/Domain_model
-[Exceptions]: https://en.wikipedia.org/wiki/Exception_handling
-[Facades]: https://en.wikipedia.org/wiki/Facade_pattern
-[Factories]: https://en.wikipedia.org/wiki/Factory_%28object-oriented_programming%29
-[FinTS]: https://en.wikipedia.org/wiki/FinTS
-[frameworks]: https://en.wikipedia.org/wiki/Software_framework
-[GUI]: https://en.wikipedia.org/wiki/Graphical_user_interface
-[Hexagonal Architecture]: http://alistair.cockburn.us/Hexagonal+architecture
-[Interfaces]: https://en.wikipedia.org/wiki/Protocol_%28object-oriented_programming%29
-[libraries]: https://en.wikipedia.org/wiki/Library_%28computing%29
-[MVC]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
-[MVP]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter
-[objects]: https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes
-[Onion Architecture]: http://jeffreypalermo.com/blog/the-onion-architecture-part-1/
-[Persistence]: https://en.wikipedia.org/wiki/Persistence_%28computer_science%29
-[phpdotenv]: https://github.com/vlucas/phpdotenv
-[PSR-1]: http://www.php-fig.org/psr/psr-1/
-[PSR-2]: http://www.php-fig.org/psr/psr-2/
-[PSR-4]: http://www.php-fig.org/psr/psr-4/
-[REST API]: https://en.wikipedia.org/wiki/Representational_state_transfer
-[Scrutinizer]: https://scrutinizer-ci.com/
-[Template engines]: https://en.wikipedia.org/wiki/Template_processor
-[testing your application]: https://en.wikipedia.org/wiki/Software_testing#Testing_levels
-[traits]: https://en.wikipedia.org/wiki/Trait_%28computer_programming%29
-[typing]: https://en.wikipedia.org/wiki/Type_system
-[UpperCamelCase]: https://en.wikipedia.org/wiki/Camel_case
-[Use cases]: https://en.wikipedia.org/wiki/Use_case
-[vendor binary features]: https://getcomposer.org/doc/articles/vendor-binaries.md
+[Constant definitions]: https://en.wikipedia.org/wiki/Constant_(computer_programming) "Constants on Wikipedia"
+[database]: https://en.wikipedia.org/wiki/Database "Database on Wikipedia"
+[Dependency Injection]: https://en.wikipedia.org/wiki/Dependency_injection "Dependency Injection on Wikipedia"
+[Dependency Injection drawbacks]: https://sites.google.com/site/unclebobconsultingllc/blogs-by-robert-martin/dependency-injection-inversion "Dependency Injection Inversion by Robert C. Martin"
+[Dependency Inversion Principle]: https://en.wikipedia.org/wiki/Dependency_inversion_principle "Dependency Inversion Principle on Wikipedia"
+[Domain-Driven Design in PHP]: https://leanpub.com/ddd-in-php "Domain-Driven Design in PHP by Carlos Buenosvinos et al."
+[Domain-Driven Design]: https://en.wikipedia.org/wiki/Domain-driven_design "Domain Driven Design on Wikipedia"
+[**Domain** objects & services]: https://en.wikipedia.org/wiki/Domain_model "Domain model on Wikipedia"
+[Exceptions]: https://en.wikipedia.org/wiki/Exception_handling "Exception handling on Wikipedia"
+[Facades]: https://en.wikipedia.org/wiki/Facade_pattern "Facade pattern on Wikipedia"
+[Factories]: https://en.wikipedia.org/wiki/Factory_(object-oriented_programming) "Factories on Wikipedia"
+[FinTS]: https://en.wikipedia.org/wiki/FinTS "FinTS on Wikipedia"
+[frameworks]: https://en.wikipedia.org/wiki/Software_framework "Software framework on Wikipedia"
+[GUI]: https://en.wikipedia.org/wiki/Graphical_user_interface "Graphical User Interface on Wikipedia"
+[Hexagonal Architecture]: http://alistair.cockburn.us/Hexagonal+architecture "The Hexagonal Architecture by Alistair Cockburn"
+[Interfaces]: https://en.wikipedia.org/wiki/Protocol_(object-oriented_programming) "Interfaces on Wikipedia"
+[libraries]: https://en.wikipedia.org/wiki/Library_(computing) "Library on Wikipedia"
+[MVC]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller "Model-View-Controller on Wikipedia"
+[MVP]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter "Model-View-Presenter on Wikipedia"
+[objects]: https://en.wikipedia.org/wiki/Object-oriented_programming#Objects_and_classes "Object oriented programming on Wikipedia"
+[polymorphism]: https://en.wikipedia.org/wiki/Polymorphism_(computer_science) "Polymorphism on Wikipedia"
+[Onion Architecture]: http://jeffreypalermo.com/blog/the-onion-architecture-part-1/ "The Onion Architecture by Jeffrey Palermo"
+[Persistence]: https://en.wikipedia.org/wiki/Persistence_(computer_science) "Persistence on Wikipedia"
+[phpdotenv]: https://github.com/vlucas/phpdotenv "vlucas/phpdotenv by Vance Lucas on Github"
+[PSR-1]: http://www.php-fig.org/psr/psr-1/ "PSR-1: Basic Coding Standard - PHP-FIG"
+[PSR-2]: http://www.php-fig.org/psr/psr-2/ "PSR-2: Coding Style Guide - PHP-FIG"
+[PSR-4]: http://www.php-fig.org/psr/psr-4/ "PSR-4: Autoloader - PHP-FIG"
+[REST API]: https://en.wikipedia.org/wiki/Representational_state_transfer "Representational state transfer on Wikipedia"
+[S.O.L.I.D. Software Development]: http://www.codemag.com/article/1001061 "S.O.L.I.D. Software Development, One Step at a Time by Derek Bailey" 
+[Scrutinizer]: https://scrutinizer-ci.com/ "Measure and Improve Code Quality continuously with Scrutinizer"
+[Template engines]: https://en.wikipedia.org/wiki/Template_processor "Template processor on Wikipedia"
+[testing your application]: https://en.wikipedia.org/wiki/Software_testing#Testing_levels "Testing levels on Wikipedia"
+[traits]: https://en.wikipedia.org/wiki/Trait_(computer_programming) "Traits on Wikipedia"
+[typing]: https://en.wikipedia.org/wiki/Type_system "Type system on Wikipedia"
+[UpperCamelCase]: https://en.wikipedia.org/wiki/Camel_case "Camel case on Wikipedia"
+[Use cases]: https://en.wikipedia.org/wiki/Use_case "Use case on Wikipedia"
+[vendor binary features]: https://getcomposer.org/doc/articles/vendor-binaries.md "Vendor binaries and the vendor/bin directory - Composer"
