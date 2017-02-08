@@ -138,7 +138,7 @@ In order to not violate the Dependency Rule, the [Dependency Inversion Principle
 
 ### Decoupling & Dependency Injection
 
-In general, avoid tight coupling between components and prefer abstractions / [interfaces] over concrete implementations, enabling [polymorphism] and making your application a lot better testable. You will always have to deal with object instantiation and global entities at some point, but try to limit their occurrences and manage them smartly. Some type of [Dependency Injection] mechanism might be of great help, but please consider the [possible drawbacks][Dependency Injection drawbacks] as well. 
+In general, avoid tight coupling between components and prefer abstractions / [interfaces] over concrete implementations, thus enabling [polymorphism] and making your application a lot better testable. You will always have to deal with object instantiation and globals at some point, but try to limit their occurrences to a minimum and manage them smartly. Some type of [Dependency Injection] mechanism might be of great help, but please consider the [possible drawbacks][Dependency Injection drawbacks] as well. DI configuration should be part of the [*Infrastructure* sector](#infrastructure) or of a general bootstrap process, stored somewhere outside the layer directories altogether.
 
 
 ### Naming conventions
