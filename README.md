@@ -167,6 +167,9 @@ The following special components (and their files) must be named after their rol
 * [Clean Architecture in PHP] by Kristopher Wilson
 * [Domain-Driven Design in PHP] by Carlos Buenosvinos et al.
 
+##  Legal
+
+Copyright © 2017 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl). Licensed under the terms of the [MIT license](LICENSE.txt). Originally published at at https://jkphl.is/articles/clear-architecture-php
 
 [ADR]: http://pmjones.io/adr/ "Action-Domain-Responder by Paul M. Jones"
 [Clean Architecture in PHP]: https://leanpub.com/cleanphp "Clean Architecture in PHP by Kristopher Wilson"
